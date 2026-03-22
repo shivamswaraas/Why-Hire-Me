@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shivam Prateek — Content Strategist & Copywriter</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#07070E; --bg2:#0F0F1A; --bg3:#161625;
+  --gold:#C9933A; --gold-light:#E8B86D; --gold-pale:rgba(201,147,58,0.12);
+  --white:#F0EDE6; --muted:#7A7A8C; --border:rgba(201,147,58,0.2); --text:#C8C5BC;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;line-height:1.7;overflow-x:hidden;cursor:none;}
+
+/* CURSOR */
+.cursor{width:12px;height:12px;background:var(--gold);border-radius:50%;position:fixed;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .2s,height .2s;}
+.cursor-ring{width:36px;height:36px;border:1.5px solid var(--gold);border-radius:50%;position:fixed;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width .3s,height .3s;opacity:.6;}
+
+/* NOISE */
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");pointer-events:none;z-index:0;opacity:.4;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 60px;display:flex;justify-content:space-between;align-items:center;background:linear-gradient(to bottom,rgba(7,7,14,.95),transparent);backdrop-filter:blur(8px);}
+.nav-logo{font-family:'Playfair Display',serif;font-size:18px;color:var(--white);letter-spacing:.02em;}
+.nav-logo span{color:var(--gold);}
+.nav-links{display:flex;gap:32px;}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:13px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;transition:color .2s;}
+.nav-links a:hover{color:var(--gold);}
+.nav-hire{background:var(--gold)!important;color:#07070E!important;padding:8px 20px;border-radius:100px;font-weight:600!important;}
+.nav-hire:hover{background:var(--gold-light)!important;}
+
+/* HAMBURGER */
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:6px;background:none;border:none;z-index:200;}
+.hamburger span{display:block;width:24px;height:2px;background:var(--white);border-radius:2px;transition:all .3s;}
+.hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0);}
+.hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+.mobile-menu{display:none;position:fixed;inset:0;background:rgba(7,7,14,.98);z-index:150;flex-direction:column;align-items:center;justify-content:center;gap:32px;backdrop-filter:blur(12px);}
+.mobile-menu.open{display:flex;}
+.mobile-menu a{font-family:'Playfair Display',serif;font-size:32px;font-weight:700;color:var(--white);text-decoration:none;transition:color .2s;cursor:pointer;}
+.mobile-menu a:hover{color:var(--gold);}
+.mobile-menu .nav-hire{background:var(--gold);color:#07070E!important;padding:14px 36px;border-radius:100px;font-family:'DM Sans',sans-serif;font-size:16px!important;font-weight:700;}
+
+/* HERO */
+.hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:120px 60px 80px;position:relative;gap:60px;}
+.hero-bg-line{position:absolute;top:50%;left:55%;border:1px solid rgba(201,147,58,.06);border-radius:50%;transform:translate(-50%,-50%);pointer-events:none;}
+.hero-bg-line:nth-child(1){width:600px;height:600px;}
+.hero-bg-line:nth-child(2){width:900px;height:900px;border-color:rgba(201,147,58,.04);}
+.hero-eyebrow{font-family:'DM Mono',monospace;font-size:12px;color:var(--gold);letter-spacing:.2em;text-transform:uppercase;margin-bottom:24px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;}
+.hero-eyebrow::before{content:'';display:block;width:32px;height:1px;background:var(--gold);flex-shrink:0;}
+h1{font-family:'Playfair Display',serif;font-size:clamp(48px,6vw,84px);font-weight:900;color:var(--white);line-height:1.05;margin-bottom:20px;letter-spacing:-.02em;}
+h1 em{font-style:italic;color:var(--gold);}
+.hero-typewriter{font-family:'DM Mono',monospace;font-size:15px;color:var(--gold-light);margin-bottom:32px;min-height:24px;}
+.cursor-blink{display:inline-block;width:2px;height:16px;background:var(--gold);margin-left:2px;vertical-align:middle;animation:blink 1s step-end infinite;}
+@keyframes blink{50%{opacity:0}}
+.hero-desc{font-size:16px;color:var(--muted);max-width:440px;margin-bottom:40px;line-height:1.8;}
+.hero-actions{display:flex;gap:16px;flex-wrap:wrap;}
+.btn-primary{background:var(--gold);color:#07070E;border:none;padding:14px 32px;border-radius:100px;font-family:'DM Sans',sans-serif;font-weight:600;font-size:14px;cursor:pointer;transition:all .2s;text-decoration:none;display:inline-flex;align-items:center;gap:8px;}
+.btn-primary:hover{background:var(--gold-light);transform:translateY(-2px);}
+.btn-outline{background:transparent;color:var(--white);border:1px solid var(--border);padding:14px 32px;border-radius:100px;font-family:'DM Sans',sans-serif;font-weight:500;font-size:14px;cursor:pointer;transition:all .2s;text-decoration:none;display:inline-flex;align-items:center;gap:8px;}
+.btn-outline:hover{border-color:var(--gold);color:var(--gold);transform:translateY(-2px);}
+.hero-stats{display:flex;gap:40px;flex-wrap:wrap;margin-top:48px;padding-top:40px;border-top:1px solid var(--border);}
+.stat-num{font-family:'Playfair Display',serif;font-size:36px;font-weight:700;color:var(--white);line-height:1;}
+.stat-num span{color:var(--gold);}
+.stat-label{font-size:12px;color:var(--muted);margin-top:4px;text-transform:uppercase;letter-spacing:.06em;}
+
+/* HERO VISUAL */
+.hero-visual{position:relative;display:flex;align-items:center;justify-content:center;}
+.profile-frame{width:320px;height:380px;position:relative;}
+.profile-glow{position:absolute;inset:-40px;background:radial-gradient(ellipse at center,rgba(201,147,58,.15) 0%,transparent 70%);pointer-events:none;}
+.profile-card{width:100%;height:100%;background:var(--bg3);border:1px solid var(--border);border-radius:24px;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;overflow:hidden;box-shadow:0 40px 80px rgba(0,0,0,.6),inset 0 1px 0 rgba(201,147,58,.1);}
+.profile-card::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(201,147,58,.05) 0%,transparent 60%);}
+.profile-initials{font-family:'Playfair Display',serif;font-size:80px;font-weight:900;color:var(--gold);line-height:1;z-index:1;}
+.profile-role{font-family:'DM Mono',monospace;font-size:11px;color:var(--gold);letter-spacing:.15em;text-transform:uppercase;margin-top:16px;z-index:1;}
+.floating-badge{position:absolute;background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:10px 16px;font-size:12px;font-weight:500;color:var(--white);display:flex;align-items:center;gap:8px;box-shadow:0 8px 32px rgba(0,0,0,.4);animation:float 4s ease-in-out infinite;backdrop-filter:blur(8px);}
+.floating-badge:nth-child(2){top:-20px;right:-40px;animation-delay:0s;}
+.floating-badge:nth-child(3){bottom:40px;left:-50px;animation-delay:1.5s;}
+.floating-badge:nth-child(4){top:120px;right:-60px;animation-delay:.8s;}
+.badge-dot{width:6px;height:6px;border-radius:50%;background:#4ADE80;}
+.badge-dot.gold{background:var(--gold);}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+
+/* SECTIONS */
+section{padding:100px 60px;position:relative;z-index:1;}
+.section-label{font-family:'DM Mono',monospace;font-size:11px;color:var(--gold);letter-spacing:.2em;text-transform:uppercase;margin-bottom:16px;display:flex;align-items:center;gap:12px;}
+.section-label::after{content:'';flex:1;height:1px;background:var(--border);}
+h2{font-family:'Playfair Display',serif;font-size:clamp(34px,4vw,52px);font-weight:700;color:var(--white);line-height:1.1;margin-bottom:16px;}
+h2 em{font-style:italic;color:var(--gold);}
+
+/* PITCH */
+.pitch-section{background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+.pitch-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:16px;overflow:hidden;margin-top:48px;}
+.pitch-card{background:var(--bg2);padding:40px 36px;transition:background .3s;}
+.pitch-card:hover{background:var(--bg3);}
+.pitch-icon{font-size:32px;margin-bottom:20px;display:block;}
+.pitch-card h3{font-family:'Playfair Display',serif;font-size:22px;color:var(--white);margin-bottom:12px;font-weight:700;}
+.pitch-card p{font-size:14px;color:var(--muted);line-height:1.7;}
+
+/* SKILLS */
+.skills-section{background:var(--bg);}
+.skills-intro{max-width:600px;margin-bottom:56px;color:var(--muted);font-size:15px;}
+.skill-category{margin-bottom:40px;}
+.skill-cat-title{font-family:'DM Mono',monospace;font-size:11px;color:var(--gold);letter-spacing:.15em;text-transform:uppercase;margin-bottom:16px;}
+.skill-tags{display:flex;flex-wrap:wrap;gap:10px;}
+.skill-tag{border:1px solid var(--border);color:var(--text);padding:8px 18px;border-radius:100px;font-size:13px;cursor:pointer;transition:all .25s;background:transparent;font-family:'DM Sans',sans-serif;position:relative;overflow:hidden;}
+.skill-tag::before{content:'';position:absolute;inset:0;background:var(--gold);transform:scaleX(0);transform-origin:left;transition:transform .25s;z-index:-1;border-radius:100px;}
+.skill-tag:hover,.skill-tag.active{border-color:var(--gold);color:#07070E;font-weight:600;}
+.skill-tag:hover::before,.skill-tag.active::before{transform:scaleX(1);}
+
+/* EXPERIENCE */
+.exp-section{background:var(--bg2);}
+.timeline{position:relative;padding-left:32px;}
+.timeline::before{content:'';position:absolute;left:0;top:16px;bottom:16px;width:1px;background:linear-gradient(to bottom,var(--gold),transparent);}
+.exp-item{position:relative;padding:36px 40px;background:var(--bg);border:1px solid var(--border);border-radius:16px;margin-bottom:24px;transition:all .3s;cursor:default;}
+.exp-item:hover{border-color:var(--gold);transform:translateX(8px);box-shadow:0 8px 40px rgba(201,147,58,.08);}
+.exp-item.highlight{border-color:var(--gold);background:rgba(201,147,58,.04);}
+.exp-dot{position:absolute;left:-40px;top:40px;width:10px;height:10px;border-radius:50%;background:var(--gold);border:2px solid var(--bg2);box-shadow:0 0 0 4px rgba(201,147,58,.2);}
+.exp-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;flex-wrap:wrap;gap:12px;}
+.exp-title{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--white);}
+.exp-period{font-family:'DM Mono',monospace;font-size:12px;color:var(--gold);background:var(--gold-pale);padding:4px 14px;border-radius:100px;border:1px solid var(--border);}
+.exp-company{font-size:14px;color:var(--gold-light);margin-bottom:20px;font-weight:500;}
+.exp-bullets{list-style:none;}
+.exp-bullets li{padding:6px 0 6px 20px;position:relative;font-size:14px;color:var(--muted);line-height:1.6;}
+.exp-bullets li::before{content:'▹';position:absolute;left:0;color:var(--gold);font-size:12px;}
+.exp-highlight-tag{display:inline-flex;align-items:center;gap:6px;background:rgba(74,222,128,.1);border:1px solid rgba(74,222,128,.2);color:#4ADE80;font-family:'DM Mono',monospace;font-size:11px;padding:3px 10px;border-radius:100px;margin-top:12px;}
+
+/* PROFICIENCY */
+.proficiency-section{background:var(--bg);}
+.radar-section{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;margin-top:56px;}
+.radar-bars{display:flex;flex-direction:column;gap:20px;}
+.skill-bar-header{display:flex;justify-content:space-between;margin-bottom:8px;}
+.skill-bar-name{font-size:13px;color:var(--white);font-weight:500;}
+.skill-bar-pct{font-family:'DM Mono',monospace;font-size:12px;color:var(--gold);}
+.skill-bar-track{height:4px;background:var(--bg3);border-radius:100px;overflow:hidden;}
+.skill-bar-fill{height:100%;background:linear-gradient(90deg,var(--gold),var(--gold-light));border-radius:100px;width:0%;transition:width 1.2s cubic-bezier(.16,1,.3,1);}
+.edu-card{background:var(--bg2);border:1px solid var(--border);border-radius:20px;padding:40px;}
+.edu-label{font-family:'DM Mono',monospace;font-size:11px;color:var(--gold);letter-spacing:.15em;margin-bottom:24px;}
+.edu-entry{margin-bottom:24px;}
+.edu-degree{font-size:16px;color:var(--white);font-weight:600;margin-bottom:4px;}
+.edu-school{font-size:13px;color:var(--muted);}
+.fw-label{font-family:'DM Mono',monospace;font-size:11px;color:var(--gold);margin-bottom:16px;margin-top:0;}
+.fw-tags{display:flex;flex-wrap:wrap;gap:8px;}
+.fw-tag{background:var(--gold-pale);border:1px solid var(--border);color:var(--gold-light);padding:4px 12px;border-radius:100px;font-size:12px;}
+.fw-tag-special{background:linear-gradient(135deg,rgba(201,147,58,.22),rgba(201,147,58,.08));border:1px solid var(--gold);color:var(--gold);padding:4px 14px;border-radius:100px;font-size:12px;font-weight:600;letter-spacing:.03em;}
+
+/* CERTS */
+.certs-section{background:var(--bg2);}
+.certs-intro{color:var(--muted);font-size:15px;max-width:580px;margin-bottom:48px;}
+.certs-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;}
+.cert-item{background:var(--bg);border:1px solid var(--border);border-radius:14px;padding:22px 24px;display:flex;align-items:flex-start;gap:18px;transition:all .25s;cursor:default;}
+.cert-item:hover{border-color:var(--gold);transform:translateX(4px);box-shadow:0 4px 24px rgba(201,147,58,.08);}
+.cert-icon{font-size:22px;flex-shrink:0;margin-top:2px;}
+.cert-name{font-size:14px;color:var(--white);font-weight:600;line-height:1.4;margin-bottom:4px;}
+.cert-issuer{font-size:12px;color:var(--muted);margin-bottom:8px;font-family:'DM Mono',monospace;}
+.cert-skills{font-size:11px;color:var(--gold);opacity:.8;}
+.cert-featured{border-color:rgba(201,147,58,.35)!important;background:linear-gradient(135deg,rgba(201,147,58,.06) 0%,var(--bg) 60%)!important;position:relative;overflow:hidden;}
+.cert-featured::before{content:'FEATURED';position:absolute;top:10px;right:12px;font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.12em;color:var(--gold);opacity:.7;}
+.cert-featured:hover{transform:translateX(4px) translateY(-2px)!important;box-shadow:0 8px 32px rgba(201,147,58,.15)!important;}
+.cert-badge{flex-shrink:0;width:44px;height:44px;background:var(--gold);border-radius:10px;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:11px;font-weight:900;color:#07070E;letter-spacing:.02em;margin-top:2px;}
+
+/* CONTACT */
+.contact-section{background:var(--bg);text-align:center;}
+.contact-grid{display:flex;justify-content:center;gap:20px;margin-top:48px;flex-wrap:wrap;}
+.contact-card{background:var(--bg2);border:1px solid var(--border);border-radius:16px;padding:28px 36px;min-width:200px;transition:all .3s;cursor:pointer;position:relative;overflow:hidden;text-decoration:none;display:block;}
+.contact-card:hover{border-color:var(--gold);transform:translateY(-4px);box-shadow:0 16px 48px rgba(201,147,58,.12);}
+.contact-card-icon{font-size:28px;margin-bottom:12px;display:block;}
+.contact-card-label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px;}
+.contact-card-value{font-size:14px;color:var(--white);font-weight:500;word-break:break-all;}
+.copy-tooltip{position:absolute;top:8px;right:8px;background:var(--gold);color:#07070E;font-size:10px;font-weight:700;padding:3px 8px;border-radius:100px;opacity:0;transition:opacity .2s;font-family:'DM Mono',monospace;}
+.contact-card:hover .copy-tooltip{opacity:1;}
+
+/* FOOTER */
+footer{padding:32px 60px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-size:13px;}
+footer span{color:var(--gold);}
+
+/* SCROLL REVEAL */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+
+/* ══ RESPONSIVE ══ */
+
+/* Large desktop */
+@media(min-width:1440px){
+  nav{padding:22px 80px;}
+  section{padding:110px 80px;}
+  .hero{padding:130px 80px 100px;}
+  footer{padding:36px 80px;}
+}
+
+/* Desktop squeeze */
+@media(max-width:1280px){
+  .hero{gap:40px;padding:120px 48px 80px;}
+  .profile-frame{width:280px;height:340px;}
+  .floating-badge:nth-child(2){right:-20px;}
+  .floating-badge:nth-child(3){left:-20px;}
+  .floating-badge:nth-child(4){right:-30px;}
+}
+
+/* Tablet landscape */
+@media(max-width:1024px){
+  nav{padding:18px 36px;}
+  .nav-links{gap:20px;}
+  .nav-links a{font-size:12px;}
+  .hero{gap:28px;padding:110px 36px 80px;}
+  .profile-frame{width:240px;height:290px;}
+  .profile-initials{font-size:60px;}
+  .floating-badge{font-size:11px;padding:7px 12px;}
+  .floating-badge:nth-child(2){right:-8px;top:-12px;}
+  .floating-badge:nth-child(3){left:-8px;}
+  .floating-badge:nth-child(4){right:-14px;}
+  section{padding:80px 36px;}
+  .pitch-grid{grid-template-columns:1fr 1fr;}
+  .radar-section{gap:48px;}
+  footer{padding:26px 36px;}
+}
+
+/* Tablet portrait — hero goes single col */
+@media(max-width:900px){
+  body{cursor:auto;}
+  .cursor,.cursor-ring{display:none;}
+  button,a,.skill-tag,.contact-card{cursor:pointer;}
+  nav{padding:16px 24px;}
+  .nav-links{display:none;}
+  .hamburger{display:flex;}
+  .hero{grid-template-columns:1fr;padding:100px 24px 64px;gap:0;min-height:auto;}
+  .hero-visual{display:none;}
+  h1{font-size:clamp(38px,10vw,62px);margin-bottom:16px;}
+  .hero-eyebrow{font-size:11px;letter-spacing:.12em;margin-bottom:20px;}
+  .hero-desc{font-size:15px;max-width:100%;}
+  .hero-actions{gap:12px;}
+  .hero-stats{gap:28px;margin-top:40px;padding-top:32px;}
+  .stat-num{font-size:30px;}
+  section{padding:70px 24px;}
+  h2{font-size:clamp(28px,7vw,44px);}
+  .pitch-grid{grid-template-columns:1fr 1fr;}
+  .pitch-card{padding:28px 22px;}
+  .pitch-card h3{font-size:18px;}
+  .timeline{padding-left:24px;}
+  .exp-item{padding:28px 24px;}
+  .exp-dot{left:-32px;}
+  .exp-title{font-size:19px;}
+  .radar-section{grid-template-columns:1fr;gap:32px;margin-top:36px;}
+  .edu-card{padding:28px 24px;border-radius:16px;}
+  .certs-grid{grid-template-columns:repeat(auto-fill,minmax(260px,1fr));}
+  .contact-section{padding:90px 24px;}
+  .contact-grid{gap:16px;}
+  footer{flex-direction:column;gap:10px;text-align:center;padding:24px;font-size:12px;}
+}
+
+/* Mobile */
+@media(max-width:640px){
+  nav{padding:14px 18px;}
+  .nav-logo{font-size:16px;}
+  .hero{padding:86px 18px 52px;}
+  h1{font-size:clamp(34px,10vw,50px);line-height:1.08;}
+  .hero-eyebrow{font-size:10px;letter-spacing:.1em;}
+  .hero-typewriter{font-size:13px;}
+  .hero-desc{font-size:14px;margin-bottom:28px;}
+  .hero-actions{flex-direction:column;gap:10px;}
+  .hero-actions .btn-primary,.hero-actions .btn-outline{width:100%;justify-content:center;padding:14px 20px;}
+  .hero-stats{gap:20px;margin-top:30px;padding-top:22px;}
+  .stat-num{font-size:26px;}
+  .stat-label{font-size:10px;}
+  section{padding:56px 18px;}
+  h2{font-size:clamp(26px,8vw,38px);}
+  .section-label{font-size:10px;letter-spacing:.12em;}
+  .pitch-grid{grid-template-columns:1fr;}
+  .pitch-card{padding:24px 20px;}
+  .pitch-card h3{font-size:17px;}
+  .pitch-icon{font-size:26px;margin-bottom:14px;}
+  .skills-intro{font-size:14px;margin-bottom:36px;}
+  .skill-tag{font-size:12px;padding:7px 13px;}
+  .skill-tags{gap:8px;}
+  .timeline{padding-left:18px;}
+  .exp-item{padding:22px 18px;}
+  .exp-dot{left:-26px;top:28px;width:8px;height:8px;}
+  .exp-title{font-size:17px;}
+  .exp-header{flex-direction:column;gap:8px;}
+  .exp-period{align-self:flex-start;font-size:11px;}
+  .exp-company{font-size:13px;margin-bottom:14px;}
+  .exp-bullets li{font-size:13px;}
+  .exp-highlight-tag{font-size:10px;}
+  .edu-card{padding:22px 18px;}
+  .edu-degree{font-size:14px;}
+  .certs-grid{grid-template-columns:1fr;gap:12px;}
+  .cert-item{padding:18px 16px;gap:14px;}
+  .cert-badge{width:40px;height:40px;font-size:9px;}
+  .cert-name{font-size:13px;}
+  .cert-issuer{font-size:11px;}
+  .cert-skills{font-size:10px;}
+  .contact-section{padding:68px 18px;}
+  .contact-grid{flex-direction:column;align-items:stretch;max-width:380px;margin-left:auto;margin-right:auto;gap:12px;}
+  .contact-card{min-width:unset;width:100%;text-align:center;padding:22px 20px;}
+  .contact-card-icon{font-size:24px;}
+  footer{padding:20px 18px;font-size:11px;gap:8px;}
+  .mobile-menu a{font-size:28px;}
+  .mobile-menu{gap:24px;}
+}
+
+/* Small mobile */
+@media(max-width:420px){
+  nav{padding:12px 14px;}
+  .hero{padding:80px 14px 46px;}
+  h1{font-size:clamp(28px,9.5vw,38px);}
+  .hero-eyebrow{font-size:9px;gap:8px;}
+  .hero-eyebrow::before{width:18px;}
+  .stat-num{font-size:22px;}
+  section{padding:44px 14px;}
+  h2{font-size:clamp(22px,8vw,30px);}
+  .pitch-card{padding:20px 16px;}
+  .pitch-card h3{font-size:15px;}
+  .skill-tag{font-size:11px;padding:6px 10px;}
+  .exp-item{padding:18px 14px;}
+  .exp-title{font-size:15px;}
+  .exp-bullets li{font-size:12px;}
+  .timeline{padding-left:14px;}
+  .exp-dot{left:-20px;}
+  .cert-item{padding:14px 12px;gap:12px;}
+  .cert-badge{width:36px;height:36px;}
+  .cert-name{font-size:12px;}
+  .contact-card{padding:18px 14px;}
+  footer{font-size:10px;}
+  .mobile-menu a{font-size:22px;}
+  .mobile-menu{gap:18px;}
+}
+
+/* Print */
+@media print{
+  body{background:white;color:black;cursor:auto;}
+  nav,.cursor,.cursor-ring,.hamburger,.mobile-menu,.hero-bg-line,.floating-badge,.profile-glow,.hero-visual{display:none!important;}
+  .hero{grid-template-columns:1fr;padding:24px;min-height:auto;}
+  section{padding:32px 24px;page-break-inside:avoid;}
+  .pitch-grid,.radar-section{grid-template-columns:1fr;}
+  .exp-item{border:1px solid #ccc;break-inside:avoid;}
+  h1,h2,h3{color:black;}
+  .reveal{opacity:1!important;transform:none!important;}
+}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Shivam <span>Prateek</span></div>
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#skills">Skills</a>
+    <a href="#experience">Experience</a>
+    <a href="#certs">Certifications</a>
+    <a href="#contact" class="nav-hire">Hire Me →</a>
+  </div>
+  <button class="hamburger" id="hamburger" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#about"      onclick="closeMenu()">About</a>
+  <a href="#skills"     onclick="closeMenu()">Skills</a>
+  <a href="#experience" onclick="closeMenu()">Experience</a>
+  <a href="#certs"      onclick="closeMenu()">Certifications</a>
+  <a href="#contact"    onclick="closeMenu()" class="nav-hire">Hire Me →</a>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="about">
+  <div class="hero-bg-line"></div>
+  <div class="hero-bg-line"></div>
+  <div class="hero-left">
+    <div class="hero-eyebrow">Pixels don't need passports · Remote-ready, Gurgaon-rooted</div>
+    <h1>Words that<br><em>convert.</em><br>Stories that<br>stick.</h1>
+    <div class="hero-typewriter"><span id="typewriter"></span><span class="cursor-blink"></span></div>
+    <p class="hero-desc">Multidisciplinary content strategist with <strong style="color:var(--white)">7+ years</strong> crafting copy that moves metrics and people alike — across SEO, UX, brand, and email.</p>
+    <div class="hero-actions">
+      <a href="#certs" class="btn-primary">🏆 View Credentials</a>
+      <a href="#experience" class="btn-outline">View My Work →</a>
+    </div>
+    <div class="hero-stats">
+      <div><div class="stat-num">3000<span>+</span></div><div class="stat-label">Pieces of Content</div></div>
+      <div><div class="stat-num">40<span>+</span></div><div class="stat-label">Clients Served</div></div>
+      <div><div class="stat-num">45<span>%</span></div><div class="stat-label">Traffic Boost (Blurn)</div></div>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="profile-frame">
+      <div class="profile-glow"></div>
+      <div class="profile-card">
+        <div class="profile-initials">SP</div>
+        <div class="profile-role">// Content Strategist</div>
+      </div>
+      <div class="floating-badge"><span class="badge-dot"></span> Open to work</div>
+      <div class="floating-badge"><span class="badge-dot gold"></span> SEO · Copy · Strategy</div>
+      <div class="floating-badge">🏆 7+ Years exp.</div>
+    </div>
+  </div>
+</section>
+
+<!-- PITCH -->
+<section class="pitch-section" id="pitch">
+  <div class="section-label">30-Second Pitch</div>
+  <h2>Why <em>Shivam?</em></h2>
+  <div class="pitch-grid reveal">
+    <div class="pitch-card">
+      <span class="pitch-icon">🎯</span>
+      <h3>Performance-First Copy</h3>
+      <p>Every word serves a metric. Boosted client organic traffic by 45% at Blurn through SEO and CRO-focused writing across 120+ articles.</p>
+    </div>
+    <div class="pitch-card">
+      <span class="pitch-icon">🧠</span>
+      <h3>Psychology + Story</h3>
+      <p>Uses AIDA, PAS, PASTOR frameworks and behavioral marketing principles to create content that resonates emotionally and converts rationally.</p>
+    </div>
+    <div class="pitch-card">
+      <span class="pitch-icon">⚡</span>
+      <h3>AI-Augmented Output</h3>
+      <p>Leverages ChatGPT, Jasper, and Gemini with expert prompting to scale content production without sacrificing voice, quality, or strategy.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section class="skills-section" id="skills">
+  <div class="section-label">Core Competencies</div>
+  <h2>The <em>Full Stack</em><br>of Content</h2>
+  <p class="skills-intro">Click any skill to highlight related experience. These aren't buzzwords — they're battle-tested capabilities.</p>
+  <div class="skill-category reveal">
+    <div class="skill-cat-title">// Copywriting &amp; Strategy</div>
+    <div class="skill-tags">
+      <button class="skill-tag" data-skill="seo">SEO Strategy</button>
+      <button class="skill-tag" data-skill="copy">Conversion Copy</button>
+      <button class="skill-tag" data-skill="landing">Landing Pages</button>
+      <button class="skill-tag" data-skill="ux">UX Microcopy</button>
+      <button class="skill-tag" data-skill="email">Email Funnels</button>
+      <button class="skill-tag" data-skill="brand">Brand Voice</button>
+      <button class="skill-tag" data-skill="long">Long-form Copy</button>
+      <button class="skill-tag" data-skill="short">Short-form Copy</button>
+      <button class="skill-tag" data-skill="ad">Ad Copywriting</button>
+      <button class="skill-tag" data-skill="product">Product Descriptions</button>
+    </div>
+  </div>
+  <div class="skill-category reveal" style="transition-delay:.1s">
+    <div class="skill-cat-title">// Research &amp; Analysis</div>
+    <div class="skill-tags">
+      <button class="skill-tag" data-skill="persona">Persona Building</button>
+      <button class="skill-tag" data-skill="journey">Customer Journey Mapping</button>
+      <button class="skill-tag" data-skill="competitor">Competitor Analysis</button>
+      <button class="skill-tag" data-skill="ab">A/B Testing</button>
+      <button class="skill-tag" data-skill="metrics">Engagement Metrics</button>
+      <button class="skill-tag" data-skill="funnel">Content Funnels (TOFU-MOFU-BOFU)</button>
+    </div>
+  </div>
+  <div class="skill-category reveal" style="transition-delay:.2s">
+    <div class="skill-cat-title">// Tools &amp; Tech</div>
+    <div class="skill-tags">
+      <button class="skill-tag" data-skill="ai">ChatGPT / Jasper / Gemini</button>
+      <button class="skill-tag" data-skill="analytics">Google Analytics / Search Console</button>
+      <button class="skill-tag" data-skill="prompt">Prompt Engineering</button>
+      <button class="skill-tag" data-skill="surfer">SurferSEO / Clearscope</button>
+      <button class="skill-tag" data-skill="figma">Figma / Canva</button>
+      <button class="skill-tag" data-skill="html">HTML/CSS Formatting</button>
+    </div>
+  </div>
+  <div class="skill-category reveal" style="transition-delay:.3s">
+    <div class="skill-cat-title">// Narrative &amp; Psychology</div>
+    <div class="skill-tags">
+      <button class="skill-tag" data-skill="storytelling">Brand Storytelling</button>
+      <button class="skill-tag" data-skill="neuro">Neuroscience of Persuasion</button>
+      <button class="skill-tag" data-skill="behav">Behavioral Marketing</button>
+      <button class="skill-tag" data-skill="literary">Literary Techniques</button>
+      <button class="skill-tag" data-skill="aida">AIDA/PAS/ACCA/PASTOR</button>
+      <button class="skill-tag" data-skill="narrative">Narrative Design</button>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section class="exp-section" id="experience">
+  <div class="section-label">Career Timeline</div>
+  <h2>Where I've <em>Made Impact</em></h2>
+  <div class="timeline">
+    <div class="exp-item reveal" id="exp-personiv">
+      <div class="exp-dot"></div>
+      <div class="exp-header">
+        <div class="exp-title">GBP Copywriter</div>
+        <div class="exp-period">Oct 2024 – Sep 2025</div>
+      </div>
+      <div class="exp-company">Personiv</div>
+      <ul class="exp-bullets">
+        <li>Created Google Business Profile posts and descriptions for clients across various industries using ChatGPT and strategic prompting</li>
+        <li>Crafted copy optimized for keyword placement, readability, and conversion within Google's character constraints</li>
+        <li>Applied industry research, tone adaptation, and on-brand messaging for high-quality output at scale</li>
+        <li>Collaborated with QA and delivery teams to maintain accuracy, performance, and turnaround SLAs</li>
+      </ul>
+      <div class="exp-highlight-tag">✦ AI-augmented production at scale</div>
+    </div>
+    <div class="exp-item reveal" id="exp-blurn" style="transition-delay:.1s">
+      <div class="exp-dot"></div>
+      <div class="exp-header">
+        <div class="exp-title">Senior Content Writer &amp; Copywriter</div>
+        <div class="exp-period">Jan 2021 – Jan 2022</div>
+      </div>
+      <div class="exp-company">Blurn.com</div>
+      <ul class="exp-bullets">
+        <li>Boosted client organic traffic by <strong style="color:var(--gold)">45%</strong> through SEO content strategy and CRO-focused copywriting</li>
+        <li>Wrote and optimized 120+ articles across finance, tech, and ecommerce verticals</li>
+        <li>Mapped keyword and user intent to narrative flow, improving conversions and dwell time</li>
+      </ul>
+      <div class="exp-highlight-tag">📈 45% organic traffic growth</div>
+    </div>
+    <div class="exp-item reveal" id="exp-freelance" style="transition-delay:.2s">
+      <div class="exp-dot"></div>
+      <div class="exp-header">
+        <div class="exp-title">Freelance Content Strategist &amp; Copywriter</div>
+        <div class="exp-period">Jan 2018 – Present</div>
+      </div>
+      <div class="exp-company">Remote · Self-Employed</div>
+      <ul class="exp-bullets">
+        <li>Delivered <strong style="color:var(--gold)">3000+</strong> pieces of content (blogs, landing pages, scripts, email sequences, product copy) across 40+ clients</li>
+        <li>Developed content funnels and SEO-driven structures tailored to user behavior and brand tone</li>
+        <li>Used AI tools (ChatGPT, Jasper, Gemini) to accelerate ideation and maintain consistent voice at scale</li>
+        <li>Created brand voice guides and storytelling systems for emerging brands</li>
+      </ul>
+      <div class="exp-highlight-tag">🌍 40+ clients · 3000+ content pieces</div>
+    </div>
+    <div class="exp-item reveal" id="exp-aks" style="transition-delay:.3s">
+      <div class="exp-dot"></div>
+      <div class="exp-header">
+        <div class="exp-title">Copy Intern – Tax &amp; Law</div>
+        <div class="exp-period">Jan 2016 – Dec 2017</div>
+      </div>
+      <div class="exp-company">AKS Tax Laws</div>
+      <ul class="exp-bullets">
+        <li>Supported tax and accounting functions including financial statements, tax computations, and regulatory compliance documentation</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- PROFICIENCY -->
+<section class="proficiency-section" id="proficiency">
+  <div class="section-label">Proficiency Map</div>
+  <h2>Depth of <em>Expertise</em></h2>
+  <div class="radar-section">
+    <div class="radar-bars" id="skillBars">
+      <div class="skill-bar-item">
+        <div class="skill-bar-header"><span class="skill-bar-name">SEO Content Strategy</span><span class="skill-bar-pct">95%</span></div>
+        <div class="skill-bar-track"><div class="skill-bar-fill" data-pct="95"></div></div>
+      </div>
+      <div class="skill-bar-item">
+        <div class="skill-bar-header"><span class="skill-bar-name">Conversion Copywriting</span><span class="skill-bar-pct">93%</span></div>
+        <div class="skill-bar-track"><div class="skill-bar-fill" data-pct="93"></div></div>
+      </div>
+      <div class="skill-bar-item">
+        <div class="skill-bar-header"><span class="skill-bar-name">Brand Voice &amp; Storytelling</span><span class="skill-bar-pct">92%</span></div>
+        <div class="skill-bar-track"><div class="skill-bar-fill" data-pct="92"></div></div>
+      </div>
+      <div class="skill-bar-item">
+        <div class="skill-bar-header"><span class="skill-bar-name">AI-Assisted Content Production</span><span class="skill-bar-pct">90%</span></div>
+        <div class="skill-bar-track"><div class="skill-bar-fill" data-pct="90"></div></div>
+      </div>
+      <div class="skill-bar-item">
+        <div class="skill-bar-header"><span class="skill-bar-name">Email Funnels &amp; UX Microcopy</span><span class="skill-bar-pct">88%</span></div>
+        <div class="skill-bar-track"><div class="skill-bar-fill" data-pct="88"></div></div>
+      </div>
+      <div class="skill-bar-item">
+        <div class="skill-bar-header"><span class="skill-bar-name">Prompt Engineering</span><span class="skill-bar-pct">87%</span></div>
+        <div class="skill-bar-track"><div class="skill-bar-fill" data-pct="87"></div></div>
+      </div>
+      <div class="skill-bar-item">
+        <div class="skill-bar-header"><span class="skill-bar-name">Marketing Psychology</span><span class="skill-bar-pct">85%</span></div>
+        <div class="skill-bar-track"><div class="skill-bar-fill" data-pct="85"></div></div>
+      </div>
+    </div>
+    <div>
+      <div class="edu-card">
+        <div class="edu-label">// EDUCATION &amp; BACKGROUND</div>
+        <div class="edu-entry">
+          <div class="edu-degree">CA IPCC — Accounting &amp; Finance</div>
+          <div class="edu-school">ICAI, New Delhi · March 2016</div>
+        </div>
+        <div class="edu-entry" style="margin-bottom:32px">
+          <div class="edu-degree">Higher Secondary Education</div>
+          <div class="edu-school">Holy Child Academy · March 2012</div>
+        </div>
+        <div style="border-top:1px solid var(--border);padding-top:24px">
+          <div class="fw-label">// FRAMEWORKS I LIVE BY</div>
+          <div class="fw-tags">
+            <span class="fw-tag">AIDA</span>
+            <span class="fw-tag">PAS</span>
+            <span class="fw-tag">ACCA</span>
+            <span class="fw-tag">PASTOR</span>
+            <span class="fw-tag">TOFU-MOFU-BOFU</span>
+            <span class="fw-tag">WCAG AAA</span>
+            <span class="fw-tag-special" title="Frameworks are a starting point, not a ceiling">✦ First Principles</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section class="certs-section" id="certs">
+  <div class="section-label">Certifications</div>
+  <h2>Trained by the <em>Best</em></h2>
+  <p class="certs-intro">Not just certificates — proof of deliberate skill-building across the exact disciplines that move the needle in modern content roles.</p>
+  <div class="certs-grid reveal">
+    <div class="cert-item cert-featured">
+      <div class="cert-badge">Google</div>
+      <div>
+        <div class="cert-name">Foundations of Digital Marketing &amp; E-commerce</div>
+        <div class="cert-issuer">Google Career Certificates · Sep 2024</div>
+        <div class="cert-skills">Content Strategy · Email Marketing · Sales Funnels · Digital Copywriting</div>
+      </div>
+    </div>
+    <div class="cert-item cert-featured">
+      <div class="cert-badge" style="font-size:9px">HubSpot</div>
+      <div>
+        <div class="cert-name">Digital Advertising</div>
+        <div class="cert-issuer">HubSpot Academy · Sep 2024</div>
+        <div class="cert-skills">SEO Copywriting · Social Media Advertising · Email Marketing</div>
+      </div>
+    </div>
+    <div class="cert-item cert-featured">
+      <div class="cert-badge" style="font-size:9px;letter-spacing:.04em">TUM</div>
+      <div>
+        <div class="cert-name">Generative A.I.</div>
+        <div class="cert-issuer">TUM LifeLong Learning (Technical Univ. of Munich) · Jun 2025</div>
+        <div class="cert-skills">Generative AI Tools · Applied AI for Content</div>
+      </div>
+    </div>
+    <div class="cert-item">
+      <span class="cert-icon">🧠</span>
+      <div>
+        <div class="cert-name">Mastering the Art of Persuasive Writing</div>
+        <div class="cert-issuer">Alison · Aug 2024</div>
+        <div class="cert-skills">Landing Pages · Conversion Copy · SEO Copywriting</div>
+      </div>
+    </div>
+    <div class="cert-item">
+      <span class="cert-icon">⚡</span>
+      <div>
+        <div class="cert-name">Introduction to Prompt Engineering for Generative AI</div>
+        <div class="cert-issuer">LinkedIn · Jul 2025</div>
+        <div class="cert-skills">Prompt Engineering · AI Prompting</div>
+      </div>
+    </div>
+    <div class="cert-item">
+      <span class="cert-icon">💰</span>
+      <div>
+        <div class="cert-name">Learning Conversion Copywriting</div>
+        <div class="cert-issuer">LinkedIn · Jun 2025</div>
+        <div class="cert-skills">CRO · High-converting copy · Sales copy</div>
+      </div>
+    </div>
+    <div class="cert-item">
+      <span class="cert-icon">🖥️</span>
+      <div>
+        <div class="cert-name">UX Writing Fundamentals: A Comprehensive Guide</div>
+        <div class="cert-issuer">LinkedIn · Jun 2025</div>
+        <div class="cert-skills">User Experience Writing · Product Copy · Microcopy</div>
+      </div>
+    </div>
+    <div class="cert-item">
+      <span class="cert-icon">⚙️</span>
+      <div>
+        <div class="cert-name">Build Your Own GPTs</div>
+        <div class="cert-issuer">LinkedIn · Jun 2025</div>
+        <div class="cert-skills">Chatbot Development · AI Systems · Automation</div>
+      </div>
+    </div>
+    <div class="cert-item">
+      <span class="cert-icon">📝</span>
+      <div>
+        <div class="cert-name">Learning to Write Marketing Copy</div>
+        <div class="cert-issuer">LinkedIn · Jun 2025</div>
+        <div class="cert-skills">Marketing Copy · Brand Messaging · Campaign Writing</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-section" id="contact">
+  <div class="section-label" style="justify-content:center">Let's Work Together</div>
+  <h2>Ready to <em>Hire?</em></h2>
+  <p style="color:var(--muted);max-width:480px;margin:0 auto;font-size:15px;">Based in Gurgaon, open to remote, hybrid, or on-site roles. Let's build something remarkable together.</p>
+  <div class="contact-grid">
+    <div class="contact-card" onclick="copyText('ShivamSwaraas@Gmail.com',this)">
+      <span class="copy-tooltip">Click to copy</span>
+      <span class="contact-card-icon">📧</span>
+      <div class="contact-card-label">Email</div>
+      <div class="contact-card-value">ShivamSwaraas@Gmail.com</div>
+    </div>
+    <div class="contact-card" onclick="copyText('+91-8376038606',this)">
+      <span class="copy-tooltip">Click to copy</span>
+      <span class="contact-card-icon">📱</span>
+      <div class="contact-card-label">Phone</div>
+      <div class="contact-card-value">+91-8376038606</div>
+    </div>
+    <a class="contact-card" href="https://www.linkedin.com/in/shivamswaraas/" target="_blank">
+      <span class="copy-tooltip">Open ↗</span>
+      <span class="contact-card-icon">💼</span>
+      <div class="contact-card-label">LinkedIn</div>
+      <div class="contact-card-value">in/shivamswaraas</div>
+    </a>
+    <a class="contact-card" href="https://linktr.ee/shivamswaraas" target="_blank">
+      <span class="copy-tooltip">Open ↗</span>
+      <span class="contact-card-icon">🌿</span>
+      <div class="contact-card-label">Portfolio</div>
+      <div class="contact-card-value">linktr.ee/shivamswaraas</div>
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div>© 2025 <span>Shivam Prateek</span> · Content Strategist &amp; Copywriter</div>
+  <div>Gurgaon, Haryana 122001 · Open to opportunities</div>
+</footer>
+
+<script>
+// ── CURSOR ──
+const cursor = document.getElementById('cursor');
+const ring   = document.getElementById('cursorRing');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;});
+(function loop(){
+  cursor.style.left=mx+'px'; cursor.style.top=my+'px';
+  rx+=(mx-rx)*.12; ry+=(my-ry)*.12;
+  ring.style.left=rx+'px'; ring.style.top=ry+'px';
+  requestAnimationFrame(loop);
+})();
+document.querySelectorAll('a,button,.contact-card,.exp-item').forEach(function(el){
+  el.addEventListener('mouseenter',function(){cursor.style.width='20px';cursor.style.height='20px';ring.style.width='50px';ring.style.height='50px';});
+  el.addEventListener('mouseleave',function(){cursor.style.width='12px';cursor.style.height='12px';ring.style.width='36px';ring.style.height='36px';});
+});
+
+// ── TYPEWRITER ──
+var phrases=['SEO Strategist & CRO Copywriter','Brand Voice Architect','AI-Augmented Content Creator','Email Funnel Specialist','UX Microcopy Expert','Behavioral Marketing Writer'];
+var pi=0,ci=0,deleting=false;
+var tw=document.getElementById('typewriter');
+function type(){
+  var p=phrases[pi];
+  if(!deleting){tw.textContent=p.slice(0,++ci);if(ci===p.length){deleting=true;setTimeout(type,2000);return;}}
+  else{tw.textContent=p.slice(0,--ci);if(ci===0){deleting=false;pi=(pi+1)%phrases.length;}}
+  setTimeout(type,deleting?40:70);
+}
+type();
+
+// ── SCROLL REVEAL ──
+// rootMargin ensures elements reveal before fully in view; fallback forces after 2s
+function initReveal(){
+  var els=document.querySelectorAll('.reveal');
+  if(!('IntersectionObserver' in window)){
+    els.forEach(function(el){el.classList.add('visible');});
+    return;
+  }
+  var obs=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}
+    });
+  },{threshold:0,rootMargin:'0px 0px -40px 0px'});
+  els.forEach(function(el){obs.observe(el);});
+  // Safety net: force-show anything still hidden after 2.5s
+  setTimeout(function(){
+    document.querySelectorAll('.reveal:not(.visible)').forEach(function(el){el.classList.add('visible');});
+  },2500);
+}
+initReveal();
+
+// ── SKILL BARS ──
+var barDone=false;
+var barObs=new IntersectionObserver(function(entries){
+  if(entries[0].isIntersecting&&!barDone){
+    barDone=true;
+    document.querySelectorAll('.skill-bar-fill').forEach(function(b){b.style.width=b.dataset.pct+'%';});
+    barObs.disconnect();
+  }
+},{threshold:0.15});
+barObs.observe(document.getElementById('skillBars'));
+
+// ── COPY TO CLIPBOARD ──
+function copyText(text,el){
+  var tip=el.querySelector('.copy-tooltip');
+  if(navigator.clipboard){
+    navigator.clipboard.writeText(text).then(function(){
+      if(tip){tip.textContent='✓ Copied!';setTimeout(function(){tip.textContent='Click to copy';},2000);}
+    }).catch(function(){});
+  }
+}
+
+// ── SKILL TAG HIGHLIGHT ──
+var skillMap={
+  seo:['exp-blurn','exp-freelance'],copy:['exp-blurn','exp-personiv','exp-freelance'],
+  landing:['exp-freelance'],ux:['exp-freelance'],email:['exp-freelance'],
+  brand:['exp-freelance','exp-personiv'],long:['exp-blurn','exp-freelance'],
+  short:['exp-personiv','exp-freelance'],ad:['exp-freelance'],product:['exp-personiv','exp-freelance'],
+  persona:['exp-freelance'],journey:['exp-freelance'],competitor:['exp-blurn','exp-freelance'],
+  ab:['exp-blurn'],metrics:['exp-blurn'],funnel:['exp-freelance'],
+  ai:['exp-personiv','exp-freelance'],analytics:['exp-blurn'],prompt:['exp-personiv','exp-freelance'],
+  surfer:['exp-blurn'],figma:['exp-freelance'],html:['exp-freelance'],
+  storytelling:['exp-freelance'],neuro:['exp-freelance'],behav:['exp-freelance'],
+  literary:['exp-freelance'],aida:['exp-blurn','exp-freelance'],narrative:['exp-freelance']
+};
+document.querySelectorAll('.skill-tag').forEach(function(tag){
+  tag.addEventListener('click',function(){
+    var wasActive=this.classList.contains('active');
+    document.querySelectorAll('.skill-tag').forEach(function(t){t.classList.remove('active');});
+    document.querySelectorAll('.exp-item').forEach(function(e){e.classList.remove('highlight');});
+    if(!wasActive){
+      this.classList.add('active');
+      var ids=skillMap[this.dataset.skill]||[];
+      ids.forEach(function(id){
+        var el=document.getElementById(id);
+        if(el){el.classList.add('highlight');el.scrollIntoView({behavior:'smooth',block:'nearest'});}
+      });
+    }
+  });
+});
+
+// ── HAMBURGER ──
+var ham=document.getElementById('hamburger');
+var mob=document.getElementById('mobileMenu');
+ham.addEventListener('click',function(){
+  ham.classList.toggle('open');
+  mob.classList.toggle('open');
+  document.body.style.overflow=mob.classList.contains('open')?'hidden':'';
+});
+function closeMenu(){
+  ham.classList.remove('open');
+  mob.classList.remove('open');
+  document.body.style.overflow='';
+}
+
+// ── NAV ACTIVE ──
+var navSections=document.querySelectorAll('section[id]');
+window.addEventListener('scroll',function(){
+  var cur='';
+  navSections.forEach(function(s){if(window.scrollY>=s.offsetTop-140)cur=s.id;});
+  document.querySelectorAll('.nav-links a').forEach(function(a){
+    a.style.color=a.getAttribute('href')==='#'+cur?'var(--gold)':'';
+  });
+});
+</script>
+</body>
+</html>
